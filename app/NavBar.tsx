@@ -1,9 +1,14 @@
-import { David_Libre } from 'next/font/google'
-import Link from 'next/link'
-import React from 'react'
+'use client';
+
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import React from 'react';
 import { GiBugNet } from "react-icons/gi";
+import classnames from 'classnames';
 
 const NavBar = () => {
+  const currentPath = usePathname();
+
   const links = [
     { label: 'Dashboard', href: '/' },
     { label: 'Issues', href: '/issues' }
@@ -11,12 +16,16 @@ const NavBar = () => {
 
   return (
     <nav className='flex space-x-6 border-b mb-5 px-5 h-14 items-center'>
-        <Link className='text-zinc-600 hover:text-zinc-900 transition-colors' href='/'><GiBugNet /></Link>
+        <Link href='/'><GiBugNet /></Link>
         <ul className='flex space-x-6'>
           {links.map(link => 
             <Link 
               key={link.href} 
-              className='text-zinc-600 hover:text-zinc-900 transition-colors' 
+              className={classnames({
+                'text-zinc-900': link.href === currentPath,
+                'text-zinc-500': link.href !== currentPath,
+                'hover:text-zinc-800 transition-colors': true
+              })} 
               href={link.href}>{link.label}</Link>)}
         </ul>
     </nav>
