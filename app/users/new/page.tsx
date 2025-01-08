@@ -3,7 +3,7 @@ import React from 'react'
 const NewUserPage = () => {
   return (
     <div>
-      New Users Page
+      New User s Page
     </div>
   )
 }
